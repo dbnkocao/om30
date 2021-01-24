@@ -1,9 +1,11 @@
 class Municipe < ApplicationRecord
   validates_presence_of :nome, :cpf, :email, :dt_nasc, :telefone
-
+  validates_uniqueness_of :cpf
   validate :cpf_valido
   validate :idade_valida
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  has_one :endereco
 
   private
 
