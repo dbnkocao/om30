@@ -4,6 +4,7 @@ class Municipe < ApplicationRecord
   validate :cpf_valido
   validate :idade_valida
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  after_create :notificacao
 
   has_one :endereco
 
@@ -19,5 +20,9 @@ class Municipe < ApplicationRecord
     if self.dt_nasc != nil and Date.today.year - self.dt_nasc.year > 150 || Date.today.year - self.dt_nasc.year < 0
       errors.add(:dt_nasc, "Data de Nascimento inválida, a idade do Municipe deve ficar entre 0 e 150")
     end
+  end
+
+  def notificacao
+    NotificacaoJob.perform_later
   end
 end
