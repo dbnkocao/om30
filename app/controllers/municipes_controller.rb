@@ -4,7 +4,7 @@ class MunicipesController < ApplicationController
   # GET /municipes
   # GET /municipes.json
   def index
-    @municipes = Municipe.all
+    @municipes = Municipe.paginate(page: params[:page], per_page: 50)
   end
 
   # GET /municipes/1

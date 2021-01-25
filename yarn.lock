@@ -1141,6 +1141,11 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
+angular2@^2.0.0-beta.2:
+  version "2.0.0-beta.21"
+  resolved "https://registry.yarnpkg.com/angular2/-/angular2-2.0.0-beta.21.tgz#78643e590641526a2596dcd1d5cca3a5509ed76d"
+  integrity sha1-eGQ+WQZBUmolltzR1cyjpVCe120=
+
 ansi-colors@^3.0.0:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-3.2.4.tgz#e3a3da4bfbae6c86a9c285625de124a234026fbf"
@@ -2716,6 +2721,16 @@ es-to-primitive@^1.2.1:
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
 
+es6-promise@^3.0.2:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-3.3.1.tgz#a08cdde84ccdbf34d027a1451bc91d4bcd28a613"
+  integrity sha1-oIzd6EzNvzTQJ6FFG8kdS80ophM=
+
+es6-shim@^0.33.13:
+  version "0.33.13"
+  resolved "https://registry.yarnpkg.com/es6-shim/-/es6-shim-0.33.13.tgz#894fb83d2c2e9378c8ec23659f2b62b28f994225"
+  integrity sha1-iU+4PSwuk3jI7CNlnytiso+ZQiU=
+
 escalade@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
@@ -4283,6 +4298,28 @@ map-visit@^1.0.0:
   integrity sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
   dependencies:
     object-visit "^1.0.0"
+
+material-icons@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/material-icons/-/material-icons-0.5.2.tgz#4b774e8ddedbaf585c536391855baeec59f95e68"
+  integrity sha512-4j0LzymSnpoyzuu6SK7tLA03BX6drnmBFI/2jGX1Ckfa89ykNiLoXr17c8i8YxYAl/pHQKEHaEzlx7zubmD/Bg==
+
+materialize-css@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/materialize-css/-/materialize-css-1.0.0.tgz#8d5db1c4a81c6d65f3b2e2ca83a8e08daa24d1be"
+  integrity sha512-4/oecXl8y/1i8RDZvyvwAICyqwNoKU4or5uf8uoAd74k76KzZ0Llym4zhJ5lLNUskcqjO0AuMcvNyDkpz8Z6zw==
+
+materializecss@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/materializecss/-/materializecss-1.0.11.tgz#a4d2bc675c335a9c99ce3f87f9969cb9ee0974f9"
+  integrity sha1-pNK8Z1wzWpyZzj+H+Zacue4JdPk=
+  dependencies:
+    angular2 "^2.0.0-beta.2"
+    es6-promise "^3.0.2"
+    es6-shim "^0.33.13"
+    reflect-metadata "^0.1.2"
+    rxjs "^5.0.0-beta.0"
+    zone.js "^0.5.10"
 
 md5.js@^1.3.4:
   version "1.3.5"
@@ -6058,6 +6095,11 @@ redent@^1.0.0:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
 
+reflect-metadata@^0.1.2:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
+  integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
+
 regenerate-unicode-properties@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/regenerate-unicode-properties/-/regenerate-unicode-properties-8.2.0.tgz#e5de7111d655e7ba60c057dbe9ff37c87e65cdec"
@@ -6271,6 +6313,13 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   integrity sha1-6Eg5bwV9Ij8kOGkkYY4laUFh7Ec=
   dependencies:
     aproba "^1.1.1"
+
+rxjs@^5.0.0-beta.0:
+  version "5.5.12"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.12.tgz#6fa61b8a77c3d793dbaf270bee2f43f652d741cc"
+  integrity sha512-xx2itnL5sBbqeeiVgNPVuQQ1nC8Jp2WfNJhXWHmElW9YmrpS9UVnNzhP3EH3HFqexO5Tlp8GhYY+WEcqcVMvGw==
+  dependencies:
+    symbol-observable "1.0.1"
 
 safe-buffer@5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
@@ -6935,6 +6984,11 @@ svgo@^1.0.0:
     stable "^0.1.8"
     unquote "~1.1.1"
     util.promisify "~1.0.0"
+
+symbol-observable@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.1.tgz#8340fc4702c3122df5d22288f88283f513d3fdd4"
+  integrity sha1-g0D8RwLDEi310iKI+IKD9RPT/dQ=
 
 tapable@^1.0.0, tapable@^1.1.3:
   version "1.1.3"
@@ -7605,3 +7659,10 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+zone.js@^0.5.10:
+  version "0.5.15"
+  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.5.15.tgz#f195b56ad0b7874c3060c3a5e61b4e234ea1b059"
+  integrity sha1-8ZW1atC3h0wwYMOl5htOI06hsFk=
+  dependencies:
+    es6-promise "^3.0.2"

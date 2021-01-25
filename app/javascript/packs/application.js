@@ -8,6 +8,13 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+require('materialize-css')
+require('material-icons')
+
+require("../shared/materialize_init")
+
+
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
