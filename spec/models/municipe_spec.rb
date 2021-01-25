@@ -12,23 +12,21 @@ RSpec.describe Municipe, type: :model do
     expect(municipe).to_not be_valid
   end
 
-  context "cpf" do
-    it "should not be valid without cpf" do
-      municipe.cpf = nil
-      expect(municipe).to_not be_valid
-    end
+  it "should not be valid without cpf" do
+    municipe.cpf = nil
+    expect(municipe).to_not be_valid
+  end
 
-    it "should not be valid with a invalid cpf" do
-      municipe.cpf = "111.111.111-11"
-      expect(municipe).to_not be_valid
-    end
+  it "should not be valid with a invalid cpf" do
+    municipe.cpf = "111.111.111-11"
+    expect(municipe).to_not be_valid
+  end
 
-    it "should be unique" do
-      municipe.save
-      municipe2 = build(:municipe)
-      municipe2.cpf = municipe.cpf
-      expect(municipe2).to_not be_valid
-    end
+  it "cpf should be unique" do
+    municipe.save
+    municipe2 = build(:municipe)
+    municipe2.cpf = municipe.cpf
+    expect(municipe2).to_not be_valid
   end
 
   it "should not be valid without email" do

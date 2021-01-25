@@ -3,6 +3,8 @@ require "rails_helper"
 RSpec.describe NotificacaoMailer, type: :mailer do
   describe "cadastro" do
     before do
+      SendSms.any_instance.stub(:call).and_return(true)
+
       @municipe = create(:municipe)
       @mail = NotificacaoMailer.cadastro(@municipe)
     end

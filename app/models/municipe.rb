@@ -24,5 +24,6 @@ class Municipe < ApplicationRecord
 
   def notificacao
     NotificacaoJob.perform_later
+    SendSms.new("#{self.nome} você foi cadastrado com o cpf: #{self.cpf} na plataforma.", self.telefone).call
   end
 end

@@ -1,7 +1,7 @@
 FROM ruby:2.7.1
 
 RUN apt-get update && apt-get install -qq -y --no-install-recommends \
-    build-essential libpq-dev imagemagick curl
+    build-essential libpq-dev imagemagick curl nano
 
 RUN apt-get install -y gnupg
 
