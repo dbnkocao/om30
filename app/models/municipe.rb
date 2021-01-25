@@ -4,9 +4,11 @@ class Municipe < ApplicationRecord
   validate :cpf_valido
   validate :idade_valida
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  after_create :notificacao
+  after_create :notificacao_cadastro
+  after_update :notificacao_atualizacao
 
   has_one :endereco
+  enum status: [:ativo, :inativo]
 
   private
 
@@ -22,8 +24,13 @@ class Municipe < ApplicationRecord
     end
   end
 
-  def notificacao
-    NotificacaoJob.perform_later
-    SendSms.new("#{self.nome} você foi cadastrado com o cpf: #{self.cpf} na plataforma.", self.telefone).call
+  def notificacao_cadastro
+    NotificacaoJob.perform_later(self, "cadastro")
+  end
+
+  def notificacao_atualizacao
+    if self.saved_change_to_status?
+      NotificacaoJob.perform_later(self, "atualizacao")
+    end
   end
 end

@@ -5,6 +5,6 @@ FactoryBot.define do
     email { FFaker::Internet.email }
     dt_nasc { FFaker::Time.between((Date.today - 150.years).strftime("%Y-%m-%d"), Date.today.strftime("%Y-%m-%d")) }
     telefone { FFaker::PhoneNumberBR.mobile_phone_number }
-    status { rand(1..2) }
+    status { rand(0..1) }
   end
 end
