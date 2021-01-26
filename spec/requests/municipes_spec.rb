@@ -64,7 +64,7 @@ RSpec.describe "/municipes", type: :request do
 
       it "redirects to the created municipe" do
         post municipes_url, params: { municipe: valid_attributes }
-        expect(response).to redirect_to(municipe_url(Municipe.last))
+        expect(response).to redirect_to(municipes_url)
       end
     end
 
@@ -105,7 +105,7 @@ RSpec.describe "/municipes", type: :request do
         municipe = Municipe.create! valid_attributes
         patch municipe_url(municipe), params: { municipe: new_attributes }
         municipe.reload
-        expect(response).to redirect_to(municipe_url(municipe))
+        expect(response).to redirect_to(municipes_url)
       end
     end
 
