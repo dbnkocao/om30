@@ -5,26 +5,37 @@
     <a class="waves-effect waves-light btn" onclick="open_modal('add')"><i class="material-icons left">add</i>Cadastrar Municipe
   </a>
 
-  <table class="striped">
+  <table class="striped" id="municipe-list">
     <thead>
       <tr>
         <th>Nome</th>
         <th>CPF</th>
         <th>Telefone</th>
-        <th></th>
+        <th>Municipio</th>
+        <th>UF</th>
+        <th>Status</th>
       </tr>
     </thead>
 
     <tbody>
       <% @municipes.each do |municipe| %>
         <tr>
-          <td><%= municipe.nome %></td>
+          <td><span class="show_municipe" data-id="<%= municipe.id %>"><%= municipe.nome %></span></td>
           <td><%= municipe.cpf %></td>
           <td><%= municipe.telefone %></td>
+          <td><%= municipe.endereco.municipio %></td>
+          <td><%= municipe.endereco.uf %></td>
+          <td><%= municipe.status %>
 
           <td>
-            <i class="material-icons" id="<%= municipe.id %>">visibility</i>
-            <i class="material-icons" id="<%= municipe.id %>">create</i>
+            <div class="row">
+              <%= form_with model: municipe do |mun|%>
+                <%= mun.hidden_field :status, value: mun.object.status == "ativo" ? "inativo" : "ativo" %>
+                <button class="btn">
+                  <%= municipe.status == "ativo" ? 'destivar' : 'ativar' %>
+                </button>
+              <% end %>
+            </div>
           </td>
         </tr>
       <% end %>

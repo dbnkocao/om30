@@ -6,8 +6,9 @@ class Municipe < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   after_create :notificacao_cadastro
   after_update :notificacao_atualizacao
+  has_one_attached :foto
 
-  has_one :endereco
+  has_one :endereco, dependent: :destroy
   accepts_nested_attributes_for :endereco, allow_destroy: true
 
   enum status: [:ativo, :inativo]

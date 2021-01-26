@@ -12,6 +12,7 @@ require('materialize-css')
 require('material-icons')
 
 require("../shared/materialize_init")
+require("./municipe")
 
 
 

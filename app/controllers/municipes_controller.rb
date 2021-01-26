@@ -28,8 +28,8 @@ class MunicipesController < ApplicationController
 
     respond_to do |format|
       if @municipe.save
-        format.html { redirect_to @municipe, notice: "Municipe was successfully created." }
-        format.json { render :show, status: :created, location: @municipe }
+        format.html { redirect_to :index, notice: "Municipe cadastrado com sucesso." }
+        # format.json { render :show, status: :created, location: @municipe }
       else
         format.html { render :new }
         format.json { render json: @municipe.errors, status: :unprocessable_entity }
@@ -42,22 +42,12 @@ class MunicipesController < ApplicationController
   def update
     respond_to do |format|
       if @municipe.update(municipe_params)
-        format.html { redirect_to @municipe, notice: "Municipe was successfully updated." }
-        format.json { render :show, status: :ok, location: @municipe }
+        format.html { redirect_to municipes_url, notice: "Status Atualizado com sucesso." }
+        # format.json { render :show, status: :ok, location: @municipe }
       else
         format.html { render :edit }
         format.json { render json: @municipe.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /municipes/1
-  # DELETE /municipes/1.json
-  def destroy
-    @municipe.destroy
-    respond_to do |format|
-      format.html { redirect_to municipes_url, notice: "Municipe was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
@@ -71,7 +61,12 @@ class MunicipesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def municipe_params
     params.fetch(:municipe, {})
-      .permit(:cpf, :email, :dt_nasc, :telefone, :status, :nome,
+      .permit(:cpf, :email, :dt_nasc, :telefone, :status, :nome, :foto,
               { :endereco_attributes => [:cep, :logradouro, :numero, :complemento, :bairro, :municipio, :uf, :codigo_ibge] })
+  end
+
+  def municipe_params_update
+    params.fetch(:municipe, {})
+      .permit(:status)
   end
 end
