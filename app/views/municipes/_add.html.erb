@@ -1,0 +1,82 @@
+
+  <div id="add" class="modal">
+    <div class="modal-content">
+      <h4>Cadastro de Municipe</h4>
+      <%= form_with model: Municipe.new do |form| %>
+        <h5>Dados Pessoais</h5>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= form.text_field :nome %>
+            <label for="nome">Nome</label>
+          </div>
+
+          <div class="input-field col s4">
+            <%= form.text_field :email %>
+            <label for="email">Email</label>
+          </div>
+
+          <div class="input-field col s4">
+            <%= form.text_field :cpf %>
+            <label for="cpf">CPF</label>
+          </div>
+
+          <div class="input-field col s4">
+            <%= form.text_field :dt_nasc, class: "datepicker" %>
+            <label for="dt_nasc">Data de Nascimento</label>
+          </div>
+
+          <div class="input-field col s4">
+            <%= form.text_field :telefone %>
+            <label for="telefone">Telefone</label>
+          </div>
+
+          <div class="input-field col s4">
+            <%= form.select :status, ["ativo","inativo"] %>
+            <label for="telefone">Telefone</label>
+          </div>
+        </div>
+        <h5>Endereço</h5>
+        <div class="row">
+        <%= form.fields_for :endereco, Endereco.new do |endereco| %>
+          <div class="input-field col s12">
+            <%= endereco.text_field :cep %>
+            <label for="cep">CEP</label>
+          </div>
+          <div class="input-field col s8">
+            <%= endereco.text_field :logradouro %>
+            <label for="cep">Logradouro</label>
+          </div>
+          <div class="input-field col s2">
+            <%= endereco.text_field :numero %>
+            <label for="numero">Número</label>
+          </div>
+          <div class="input-field col s2">
+            <%= endereco.text_field :complemento %>
+            <label for="complemento">Complemento</label>
+          </div>
+          <div class="input-field col s4">
+            <%= endereco.text_field :bairro %>
+            <label for="bairro">Bairro</label>
+          </div>
+          <div class="input-field col s4">
+            <%= endereco.text_field :municipio %>
+            <label for="municipio">Municipio</label>
+          </div>
+          <div class="input-field col s4">
+            <%= endereco.text_field :uf %>
+            <label for="cidade">UF</label>
+          </div>
+          <div class="input-field col s4">
+            <%= endereco.text_field :codigo_ibge %>
+            <label for="codigo_ibge">Código IBGE</label>
+          </div>
+        <% end %>
+        </div>
+
+        <button class="btn">Cadastrar</button>
+      <% end %>
+    </div>
+    <div class="modal-footer">
+      <%# <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a> %>
+    </div>
+  </div>

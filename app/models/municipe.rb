@@ -8,6 +8,8 @@ class Municipe < ApplicationRecord
   after_update :notificacao_atualizacao
 
   has_one :endereco
+  accepts_nested_attributes_for :endereco, allow_destroy: true
+
   enum status: [:ativo, :inativo]
 
   private

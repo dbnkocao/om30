@@ -70,6 +70,8 @@ class MunicipesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def municipe_params
-    params.fetch(:municipe, {}).permit(:cpf, :email, :dt_nasc, :telefone, :status, :nome)
+    params.fetch(:municipe, {})
+      .permit(:cpf, :email, :dt_nasc, :telefone, :status, :nome,
+              { :endereco_attributes => [:cep, :logradouro, :numero, :complemento, :bairro, :municipio, :uf, :codigo_ibge] })
   end
 end
