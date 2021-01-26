@@ -53,6 +53,8 @@ services:
     environment:
       ELASTICSEARCH_URL: elasticsearch:9200
       RAILS_ENV: production
+    ports:
+      - 3000
   
   proxy:
     container_name: proxy
@@ -60,7 +62,7 @@ services:
     depends_on:
       - app
     volumes:
-      - proxy:/etc/apache
+      - proxy:/etc/apache2
     ports:
       - 80:80
 
