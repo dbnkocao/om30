@@ -2,6 +2,7 @@ version: "3"
 
 services:
   postgres:
+    container_name: postgres
     image: "postgres:12"
     volumes:
       - postgres:/var/lib/postgresql/data
@@ -9,6 +10,7 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
 
   redis:
+    container_name: redis
     image: "redis:6.0"
     command: redis-server
     ports:
@@ -17,6 +19,7 @@ services:
       - redis:/var/lib/redis/data
 
   elasticsearch:
+    container_name: elasticsearch
     image: "elasticsearch:5"
     ports:
       - "9200:9200"
@@ -24,6 +27,7 @@ services:
       - elastic:/usr/share/elasticsearch/data
 
   jobs:
+    container_name: jobs
     depends_on:
       - 'postgres'
       - 'redis'
@@ -37,6 +41,7 @@ services:
       RAILS_ENV: production
 
   app:
+    container_name: app
     depends_on:
       - "postgres"
       - "redis"
@@ -48,9 +53,18 @@ services:
     environment:
       ELASTICSEARCH_URL: elasticsearch:9200
       RAILS_ENV: production
+  
+  proxy:
+    container_name: proxy
+    image: dbnkocao/proxy:apache
+    depends_on:
+      - app
+    volumes:
+      - proxy:/etc/apache
 
 volumes:
   redis:
   postgres:
   gems:
   elastic:
+  proxy:

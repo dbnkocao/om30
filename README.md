@@ -24,7 +24,7 @@ Tecnologias usadas nesse projeto.
 * will_paginate
 
 ## Setup
-Para o funcionamento correto do sistmema é preciso configurar as credencias para os serviços de email e sms.
+Para o funcionamento correto do sistema é preciso configurar as credencias para os serviços de email e sms.
 Primeiramente remova o arquivo de credencieas do repositório
   > rm config/credentials.yml.enc
 
@@ -54,7 +54,7 @@ obs: substitua os valores atribuídos as credenciais
   >    $ rails s
 
 ## Deploy usando Docker e Docker Compose
-
+  ### Desenvolvimento
   > docker-compose run --rm app bundle install
 
   > docker-compose run --rm app yarn install
@@ -62,6 +62,16 @@ obs: substitua os valores atribuídos as credenciais
   > docker-compose run --rm app bundle exec rake db:create db:migrate
 
   > docker-compose up -d
+
+
+  ### Produção
+  > docker-compose -f docker-compose-prod.yml run --rm app bundle install
+
+  > docker-compose -f docker-compose-prod.yml run --rm app yarn install
+
+  > docker-compose -f docker-compose-prod.yml run --rm app bundle exec rake db:create db:migrate
+
+  > docker-compose -f docker-compose-prod.yml up -d
 
 ## Como Usar
 ### 1. Lista de Municipes
