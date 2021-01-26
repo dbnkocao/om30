@@ -61,6 +61,8 @@ services:
       - app
     volumes:
       - proxy:/etc/apache
+    ports:
+      - 80:80
 
 volumes:
   redis:
