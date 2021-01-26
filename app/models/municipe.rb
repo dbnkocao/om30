@@ -13,6 +13,14 @@ class Municipe < ApplicationRecord
 
   enum status: [:ativo, :inativo]
 
+  searchkick
+
+  def search_data
+    attributes.merge(
+      municipio: self.endereco.try(:municipio),
+    )
+  end
+
   private
 
   def cpf_valido

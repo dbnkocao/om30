@@ -23,6 +23,17 @@ services:
     volumes:
       - elastic:/usr/share/elasticsearch/data
 
+  jobs:
+    depends_on:
+      - 'postgres'
+      - 'redis'
+      - 'app'
+    build: .
+    command: bash start_jobs
+    volumes:
+      - '.:/om30'
+      - gems:/gems
+
   app:
     depends_on:
       - "postgres"

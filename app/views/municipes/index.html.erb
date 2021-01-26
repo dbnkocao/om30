@@ -2,48 +2,21 @@
   <p id="notice"><%= notice %></p>
 
   <h1>Municipes</h1>
-    <a class="waves-effect waves-light btn" onclick="open_modal('add')"><i class="material-icons left">add</i>Cadastrar Municipe
-  </a>
+  <div class="row">
+    <div class="col s2">
+      <a class="waves-effect waves-light btn" onclick="open_modal('add')"><i class="material-icons left">add</i>Cadastrar</a>
+    </div>
 
-  <table class="striped" id="municipe-list">
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>CPF</th>
-        <th>Telefone</th>
-        <th>Municipio</th>
-        <th>UF</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @municipes.each do |municipe| %>
-        <tr>
-          <td><span class="show_municipe" data-id="<%= municipe.id %>"><%= municipe.nome %></span></td>
-          <td><%= municipe.cpf %></td>
-          <td><%= municipe.telefone %></td>
-          <td><%= municipe.endereco.municipio %></td>
-          <td><%= municipe.endereco.uf %></td>
-          <td><%= municipe.status %>
-
-          <td>
-            <div class="row">
-              <%= form_with model: municipe do |mun|%>
-                <%= mun.hidden_field :status, value: mun.object.status == "ativo" ? "inativo" : "ativo" %>
-                <button class="btn">
-                  <%= municipe.status == "ativo" ? 'destivar' : 'ativar' %>
-                </button>
-              <% end %>
-            </div>
-          </td>
-        </tr>
+    <div class="col s5 right">
+      <%= form_with action: municipes_url, method: :get do %>
+        <button class="btn right">Buscar</button>
+        <%= text_field :query, nil, class: 'col s2 right' %>
       <% end %>
-    </tbody>
-  </table>
-  <%= will_paginate @municipes, previous_label: 'Anterior', next_label: 'Próximo' %>
+    </div>
+  </div>
 
+  <div class="municipe-list">
+    <%= render "municipes/list" %>
+  </div>
   <br>
-
-<% "link_to 'New Municipe', new_municipe_path" %>
 </div>

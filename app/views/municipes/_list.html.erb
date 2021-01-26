@@ -1,0 +1,38 @@
+ <table class="striped" id="municipe-list">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>Telefone</th>
+        <th>Municipio</th>
+        <th>UF</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @municipes.each do |municipe| %>
+        <tr>
+          <td><span class="show_municipe" data-id="<%= municipe.id %>"><%= municipe.nome %></span></td>
+          <td><%= municipe.cpf %></td>
+          <td><%= municipe.telefone %></td>
+          <td><%= municipe.endereco.municipio %></td>
+          <td><%= municipe.endereco.uf %></td>
+          <td><%= municipe.status %>
+
+          <td>
+            <div class="row">
+              <%= form_with model: municipe do |mun|%>
+                <%= mun.hidden_field :status, value: mun.object.status == "ativo" ? "inativo" : "ativo" %>
+                <button class="btn">
+                  <%= municipe.status == "ativo" ? 'destivar' : 'ativar' %>
+                </button>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @municipes, previous_label: 'Anterior', next_label: 'Próximo' %>
+ 

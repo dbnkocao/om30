@@ -4,7 +4,7 @@ class MunicipesController < ApplicationController
   # GET /municipes
   # GET /municipes.json
   def index
-    @municipes = Municipe.paginate(page: params[:page], per_page: 50)
+    @municipes = Municipe.search params[:query] || "*", page: params[:page], per_page: 20
   end
 
   # GET /municipes/1
@@ -28,8 +28,8 @@ class MunicipesController < ApplicationController
 
     respond_to do |format|
       if @municipe.save
-        format.html { redirect_to :index, notice: "Municipe cadastrado com sucesso." }
-        # format.json { render :show, status: :created, location: @municipe }
+        format.html { redirect_to municipes_url, notice: "Municipe cadastrado com sucesso." }
+        format.json { render :show, status: :created, location: @municipe }
       else
         format.html { render :new }
         format.json { render json: @municipe.errors, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class MunicipesController < ApplicationController
     respond_to do |format|
       if @municipe.update(municipe_params)
         format.html { redirect_to municipes_url, notice: "Status Atualizado com sucesso." }
-        # format.json { render :show, status: :ok, location: @municipe }
+        format.json { render :show, status: :ok, location: @municipe }
       else
         format.html { render :edit }
         format.json { render json: @municipe.errors, status: :unprocessable_entity }
