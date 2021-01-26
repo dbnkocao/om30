@@ -84,5 +84,5 @@ test:
 production:
   <<: *default
   database: om30_production
-  username: om30
-  password: <%= ENV['OM30_DATABASE_PASSWORD'] %>
+  # username: om30
+  # password: <%= ENV['OM30_DATABASE_PASSWORD'] %>
