@@ -65,6 +65,7 @@ services:
       - proxy:/etc/apache2
     ports:
       - 80:80
+      - 443:443
 
 volumes:
   redis:

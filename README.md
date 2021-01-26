@@ -71,6 +71,8 @@ obs: substitua os valores atribuídos as credenciais
 
   > docker-compose -f docker-compose-prod.yml run --rm app bundle exec rake db:create db:migrate
 
+  > docker-compose -f docker-compose-prod.yml run --rm app bundle exec rails assets:precompile
+
   > docker-compose -f docker-compose-prod.yml up -d
 
 ## Como Usar
