@@ -5,7 +5,7 @@ class NotificacaoMailer < ApplicationMailer
   end
 
   def atualizacao(municipe)
-    @municpe = municipe
+    @municipe = municipe
     mail to: municipe.email, subject: "Cadastro atualizado."
   end
 end
