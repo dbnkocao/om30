@@ -3,7 +3,6 @@ const show_municipe = async (municipe_id) => {
   const response = await fetch(url);
   const data = await response.json();
 
-  // document.getElementById('foto').innerHTML = data.foto;
   document.getElementById('nome').innerHTML = data.nome;
   document.getElementById('email').innerHTML = data.email;
   document.getElementById('cpf').innerHTML = data.cpf;
@@ -32,23 +31,21 @@ const number_mask = function(value) {
 }
 
 const search_address = async function(cep){
-
   const url = `https://viacep.com.br/ws/${cep}/json/`
   const response = await fetch(url);
   const data = await response.json();
-  document.getElementById('municipe_endereco_attributes_logradouro').value = data.logradouro;
-  document.getElementById('municipe_endereco_attributes_bairro').value = data.bairro;
-  document.getElementById('municipe_endereco_attributes_municipio').value = data.localidade;
-  document.getElementById('municipe_endereco_attributes_uf').value = data.uf;
-  document.getElementById('municipe_endereco_attributes_codigo_ibge').value = data.ibge;
 
-
-
+  if(data.erro != true){
+    document.getElementById('municipe_endereco_attributes_logradouro').value = data.logradouro;
+    document.getElementById('municipe_endereco_attributes_bairro').value = data.bairro;
+    document.getElementById('municipe_endereco_attributes_municipio').value = data.localidade;
+    document.getElementById('municipe_endereco_attributes_uf').value = data.uf;
+    document.getElementById('municipe_endereco_attributes_codigo_ibge').value = data.ibge;
+  }
 }
 
 document.addEventListener('DOMContentLoaded',  () => {
   document.querySelector('.cep').addEventListener('keyup', function(e){
-    console.log(e.target.value.length)
     e.target.value = number_mask(e.target.value)
     if(this.value.length == 8){
       search_address(this.value)
