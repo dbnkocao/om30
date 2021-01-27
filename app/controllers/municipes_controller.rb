@@ -31,7 +31,7 @@ class MunicipesController < ApplicationController
         format.html { redirect_to municipes_url, notice: "Municipe cadastrado com sucesso." }
         format.json { render :show, status: :created, location: @municipe }
       else
-        format.html { render :new }
+        format.html { redirect_to municipes_url, notice: "Erro ao tentar cadastrar Municipe." }
         format.json { render json: @municipe.errors, status: :unprocessable_entity }
       end
     end

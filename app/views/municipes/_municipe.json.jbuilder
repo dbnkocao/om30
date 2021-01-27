@@ -9,3 +9,4 @@ json.endereco do
   json.uf municipe.endereco.uf
   json.codigo_ibge municipe.endereco.codigo_ibge
 end
+json.foto url_for(municipe.foto)

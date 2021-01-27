@@ -15,7 +15,7 @@
         </div>
 
         <div class="input-field col s4">
-          <%= form.text_field :cpf %>
+          <%= form.text_field :cpf, class: "number" %>
           <label for="cpf">CPF</label>
         </div>
 
@@ -25,12 +25,12 @@
         </div>
 
         <div class="input-field col s4">
-          <%= form.text_field :telefone %>
+          <%= form.text_field :telefone, class: "number" %>
           <label for="telefone">Telefone</label>
         </div>
 
         <div class="input-field col s4">
-          <%= form.select :status, ["ativo","inativo"] %>
+          <%= form.select :status, ["ativo", "inativo"] %>
           <label for="telefone">Status</label>
         </div>
         <div class="input-field col s4">
@@ -43,7 +43,7 @@
       <div class="row">
       <%= form.fields_for :endereco, Endereco.new do |endereco| %>
         <div class="input-field col s12">
-          <%= endereco.text_field :cep %>
+          <%= endereco.text_field :cep, class: "cep", maxlength: "8", size: "8" %>
           <label for="cep">CEP</label>
         </div>
         <div class="input-field col s8">
