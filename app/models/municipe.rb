@@ -8,8 +8,8 @@ class Municipe < ApplicationRecord
   after_update :notificacao_atualizacao
   has_one_attached :foto
 
-  has_one :endereco, dependent: :destroy
-  accepts_nested_attributes_for :endereco, allow_destroy: true
+  has_one :endereco
+  accepts_nested_attributes_for :endereco
 
   enum status: [:ativo, :inativo]
 
@@ -17,7 +17,7 @@ class Municipe < ApplicationRecord
 
   def search_data
     attributes.merge(
-      municipio: self.endereco.try(:municipio),
+      municipio: endereco.try(:municipio),
     )
   end
 
