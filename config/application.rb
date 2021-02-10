@@ -24,6 +24,7 @@ module Om30
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
     config.active_job.queue_adapter = :sidekiq
+    config.i18n.default_locale = "pt-BR"
 
     # Configuration for the application, engines, and railties goes here.
     #

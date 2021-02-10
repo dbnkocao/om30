@@ -6,36 +6,36 @@
       <div class="row">
         <div class="input-field col s12">
           <%= form.text_field :nome %>
-          <label for="nome">Nome</label>
+          <%= form.label :nome %>
         </div>
 
         <div class="input-field col s4">
           <%= form.text_field :email %>
-          <label for="email">Email</label>
+          <%= form.label :email %>
         </div>
 
         <div class="input-field col s4">
           <%= form.text_field :cpf, class: "number" %>
-          <label for="cpf">CPF</label>
+          <%= form.label :cpf %>
         </div>
 
         <div class="input-field col s4">
           <%= form.text_field :dt_nasc, class: "datepicker" %>
-          <label for="dt_nasc">Data de Nascimento</label>
+          <%= form.label :dt_nasc %>
         </div>
 
         <div class="input-field col s4">
           <%= form.text_field :telefone, class: "number" %>
-          <label for="telefone">Telefone</label>
+          <%= form.label :telefone %>
         </div>
 
         <div class="input-field col s4">
           <%= form.select :status, ["ativo", "inativo"] %>
-          <label for="telefone">Status</label>
+          <%= form.label :status %>
         </div>
         <div class="input-field col s4">
           <%= form.file_field :foto %>
-          <label for="foto">Foto</label>
+          <%= form.label :foto %>
         </div>
 
       </div>
@@ -44,40 +44,39 @@
       <%= form.fields_for :endereco, Endereco.new do |endereco| %>
         <div class="input-field col s12">
           <%= endereco.text_field :cep, class: "cep", maxlength: "8", size: "8" %>
-          <label for="cep">CEP</label>
+          <%= endereco.label :cep %>
         </div>
         <div class="input-field col s8">
           <%= endereco.text_field :logradouro %>
-          <label for="cep">Logradouro</label>
+          <%= endereco.label :logradouro %>
         </div>
         <div class="input-field col s2">
           <%= endereco.text_field :numero %>
-          <label for="numero">Número</label>
+          <%= endereco.label :numero %>
         </div>
         <div class="input-field col s2">
           <%= endereco.text_field :complemento %>
-          <label for="complemento">Complemento</label>
+          <%= endereco.label :complemento %>
         </div>
         <div class="input-field col s4">
           <%= endereco.text_field :bairro %>
-          <label for="bairro">Bairro</label>
+          <%= endereco.label :bairro %>
         </div>
         <div class="input-field col s4">
           <%= endereco.text_field :municipio %>
-          <label for="municipio">Municipio</label>
+          <%= endereco.label :municipio %>
         </div>
         <div class="input-field col s4">
           <%= endereco.text_field :uf %>
-          <label for="uf">UF</label>
+          <%= endereco.label :uf %>
         </div>
         <div class="input-field col s4">
           <%= endereco.text_field :codigo_ibge %>
-          <label for="codigo_ibge">Código IBGE</label>
+          <%= endereco.label :codigo_ibge %>
         </div>
       <% end %>
       </div>
-
-      <button class="btn">Cadastrar</button>
+      <%= form.submit class: "btn" %>
 
     <% end %>
   </div>
