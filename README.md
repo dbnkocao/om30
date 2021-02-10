@@ -52,6 +52,10 @@ obs: substitua os valores atribuídos as credenciais
   >    $ rake db:create db:migrate
 * Subindo o projeto:
   >    $ rails s
+* Indexando as tabelas no elasticsearch
+  >    $ rails c
+  >    $ irb> Municipe.reindex
+  >    $ irb> Endereco.reindex
 
 ## Deploy usando Docker e Docker Compose
   ### Desenvolvimento
@@ -63,6 +67,13 @@ obs: substitua os valores atribuídos as credenciais
 
   > docker-compose up -d
 
+  > docker-compose exec app bash
+
+  > bundle exec rails c
+  
+  > $ irb> Municipe.reindex
+  
+  > $ irb> Endereco.reindex
 
   ### Produção
   > docker-compose -f docker-compose-prod.yml run --rm app bundle install
@@ -74,6 +85,14 @@ obs: substitua os valores atribuídos as credenciais
   > docker-compose -f docker-compose-prod.yml run --rm app bundle exec rails assets:precompile
 
   > docker-compose -f docker-compose-prod.yml up -d
+
+  > docker-compose -f docker-compose-prod.yml exec app bash
+
+  > bundle exec rails c
+  
+  > $ irb> Municipe.reindex
+  
+  > $ irb> Endereco.reindex
 
 ## Como Usar
 ### 1. Lista de Municipes
