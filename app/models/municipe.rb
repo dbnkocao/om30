@@ -11,7 +11,7 @@ class Municipe < ApplicationRecord
   has_one :endereco
   accepts_nested_attributes_for :endereco
 
-  enum status: [:ativo, :inativo]
+  enum status: [:ativo, :inativo], _default: :ativo
 
   searchkick
 

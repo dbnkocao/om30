@@ -13,7 +13,7 @@
     <tbody>
       <% @municipes.each do |municipe| %>
         <tr>
-          <td><span class="show_municipe" data-id="<%= municipe.id %>"><%= municipe.nome %></span></td>
+          <td><span class="show-municipe" data-id="<%= municipe.id %>"><%= municipe.nome %></span></td>
           <td><%= municipe.cpf %></td>
           <td><%= municipe.telefone %></td>
           <td><%= municipe.endereco.municipio %></td>
@@ -22,12 +22,8 @@
 
           <td>
             <div class="row">
-              <%= form_with model: municipe do |mun|%>
-                <%= mun.hidden_field :status, value: mun.object.status == "ativo" ? "inativo" : "ativo" %>
-                <button class="btn">
-                  <%= municipe.status == "ativo" ? 'destivar' : 'ativar' %>
-                </button>
-              <% end %>
+              <button class="btn edit-municipe-button" data-id="<%= municipe.id %>"><%= t('helpers.submit.edit')%></button>
+              <%= button_to municipe.status == "ativo" ? "inativo" : "ativo", {action: "change_status", id: municipe.id}, method: :put, class:"btn",  form: { "data-type" => "json" } %>
             </div>
           </td>
         </tr>

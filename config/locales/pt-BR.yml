@@ -160,6 +160,7 @@ pt-BR:
       create: Criar %{model}
       submit: Cadastrar %{model}
       update: Atualizar %{model}
+      edit: Editar
   number:
     currency:
       format:
@@ -225,3 +226,4 @@ pt-BR:
   messages:
     municipe:
       created_with_success: "Municipe criado com sucesso."
+      updated_with_success: "Municipe atualizado com sucesso."

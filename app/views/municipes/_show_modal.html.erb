@@ -1,37 +1,38 @@
 <div id="show" class="modal">
   <div class="modal-content">
     <h4>Municipe</h4>
-      <img id="foto" src="">
+    
+      <img id="foto" src="<%= url_for(@municipe.foto) if @municipe.foto.present? %>">
       <h5>Dados Pessoais</h5>
       <div class="row">
         <div class="col s12">
           <label for="nome">Nome</label><br>
-          <span id="nome"></span>
+          <span id="nome"><%= @municipe.nome %></span>
         </div>
 
         <div class="col s4">
           <label for="email">Email</label><br>
-          <span id="email"></span>
+          <span id="email"><%= @municipe.email %></span>
         </div>
 
         <div class="col s4">
           <label for="cpf">CPF</label><br>
-          <span id="cpf"></span>
+          <span id="cpf"><%= @municipe.cpf %></span>
         </div>
 
         <div class="col s4">
           <label for="dt_nasc">Data de Nascimento</label><br>
-          <span id="dt_nasc"></span>
+          <span id="dt_nasc"><%= @municipe.dt_nasc.strftime("%d/%m/%Y") %></span>
         </div>
 
         <div class="col s4">
           <label for="telefone">Telefone</label><br>
-          <span id="telefone"></span>
+          <span id="telefone"><%= @municipe.telefone %></span>
         </div>
 
         <div class="col s4">
           <label for="telefone">Status</label><br>
-          <span id="status"></span>
+          <span id="status"><%= @municipe.status %></span>
         </div>
 
         <div class="col s4">
@@ -44,35 +45,35 @@
       <div class="row">
         <div class="col s12">
           <label for="cep">CEP</label><br>
-          <span id="cep"></span>
+          <span id="cep"><%= @municipe.endereco.cep %></span>
         </div>
         <div class="col s8">
           <label for="logradouro">Logradouro</label><br>
-          <span id="logradouro"></span>
+          <span id="logradouro"><%= @municipe.endereco.logradouro %></span>
         </div>
         <div class="col s2">
           <label for="numero">Número</label><br>
-          <span id="numero"></span>
+          <span id="numero"><%= @municipe.endereco.numero %></span>
         </div>
         <div class="col s2">
           <label for="complemento">Complemento</label><br>
-          <span id="complemento"></span>
+          <span id="complemento"><%= @municipe.endereco.complemento %></span>
         </div>
         <div class="input-field col s4">
           <label for="bairro">Bairro</label><br>
-          <span id="bairro"></span>
+          <span id="bairro"><%= @municipe.endereco.bairro %></span>
         </div>
         <div class="input-field col s4">
           <label for="municipio">Municipio</label><br>
-          <span id="municipio"></span>
+          <span id="municipio"><%= @municipe.endereco.municipio %></span>
         </div>
         <div class="input-field col s4">
           <label for="uf">UF</label><br>
-          <span id="uf"></span>
+          <span id="uf"><%= @municipe.endereco.uf %></span>
         </div>
         <div class="input-field col s4">
           <label for="codigo_ibge">Código IBGE</label><br>
-          <span id="codigo_ibge"></span>
+          <span id="codigo_ibge"><%= @municipe.endereco.codigo_ibge %></span>
         </div>
       </div>
   </div>

@@ -1,5 +1,5 @@
 class MunicipesController < ApplicationController
-  before_action :set_municipe, only: [:show, :edit, :update, :destroy]
+  before_action :set_municipe, only: [:show, :edit, :update, :change_status]
 
   # GET /municipes
   # GET /municipes.json
@@ -10,6 +10,16 @@ class MunicipesController < ApplicationController
   # GET /municipes/new
   def new
     @municipe = Municipe.new
+    @municipe.endereco = Endereco.new
+    render partial: "municipes/form_modal"
+  end
+
+  def show
+    render partial: "municipes/show_modal"
+  end
+
+  def edit
+    render partial: "municipes/form_modal"
   end
 
   # POST /municipes
@@ -31,11 +41,22 @@ class MunicipesController < ApplicationController
   def update
     respond_to do |format|
       if @municipe.update(municipe_params)
-        format.html { redirect_to municipes_url, notice: "Status Atualizado com sucesso." }
-        format.json { render :show, status: :ok, location: @municipe }
+        format.json { render json: { message: t("messages.municipe.updated_with_success") }, status: :created }
       else
-        format.html { render :edit }
-        format.json { render json: @municipe.errors, status: :unprocessable_entity }
+        format.json { render json: { message: (["#{t("errors.template.body")}<br>"] << @municipe.errors.full_messages).join("<br>") }, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def change_status
+    @municipe.status = @municipe.status == "ativo" ? "inativo" : "ativo"
+
+    respond_to do |format|
+      if @municipe.update(municipe_params)
+        format.html { redirect_to root_path, notice: "Status Atualizado com sucesso." }
+        format.json { render json: { message: t("messages.municipe.updated_with_success") }, status: :created }
+      else
+        format.json { render json: { message: (["#{t("errors.template.body")}<br>"] << @municipe.errors.full_messages).join("<br>") }, status: :unprocessable_entity }
       end
     end
   end
@@ -50,8 +71,8 @@ class MunicipesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def municipe_params
     params.fetch(:municipe, {})
-      .permit(:cpf, :email, :dt_nasc, :telefone, :status, :nome, :foto,
-              { :endereco_attributes => [:cep, :logradouro, :numero, :complemento, :bairro, :municipio, :uf, :codigo_ibge] })
+      .permit(:cpf, :email, :dt_nasc, :telefone, :nome, :foto,
+              { :endereco_attributes => [:id, :cep, :logradouro, :numero, :complemento, :bairro, :municipio, :uf, :codigo_ibge] })
   end
 
   def municipe_params_update

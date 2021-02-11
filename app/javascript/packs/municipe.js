@@ -1,29 +1,3 @@
-const show_municipe = async (municipe_id) => {
-  const url = `/municipes/${municipe_id}.json`
-  const response = await fetch(url);
-  const data = await response.json();
-
-  document.getElementById('nome').innerHTML = data.nome;
-  document.getElementById('email').innerHTML = data.email;
-  document.getElementById('cpf').innerHTML = data.cpf;
-  document.getElementById('dt_nasc').innerHTML = data.dt_nasc;
-  document.getElementById('telefone').innerHTML = data.telefone;
-  document.getElementById('status').innerHTML = data.status;
-
-  document.getElementById('cep').innerHTML = data.endereco.cep;
-  document.getElementById('logradouro').innerHTML = data.endereco.logradouro;
-  document.getElementById('numero').innerHTML = data.endereco.numero;
-  document.getElementById('complemento').innerHTML = data.endereco.complemento;
-  document.getElementById('bairro').innerHTML = data.endereco.bairro;
-  document.getElementById('municipio').innerHTML = data.endereco.municipio;
-  document.getElementById('uf').innerHTML = data.endereco.uf;
-  document.getElementById('codigo_ibge').innerHTML = data.endereco.codigo_ibge;
-  document.getElementById('foto').setAttribute('src', data.foto)
-
-  open_modal('show');
-  return false
-}
-
 const number_mask = function(value) {
   var regex = /\d*/g;
   var resultado = regex.exec(value);
@@ -45,43 +19,94 @@ const search_address = async function(cep){
 }
 
 document.addEventListener('DOMContentLoaded',  () => {
-  document.querySelector('.cep').addEventListener('keyup', function(e){
-    e.target.value = number_mask(e.target.value)
-    if(this.value.length == 8){
-      search_address(this.value)
-    }
+  document.getElementById('create-municipe-button').addEventListener('click', function(){
+    const url = `/municipes/new`
+
+    fetch(url)
+      .then(resp => {
+        if (!resp.ok) throw Error(resp.statusText);
+        return resp.text()
+      })
+      .then(body => {
+        open_modal('add', body)
+      }).catch(err => {
+        M.toast({html: "Ocorreu um erro na requisição." + err})
+        return false
+      })
   })
 
-  document.querySelector('#add').addEventListener('keyup', function(e){
-    if(e.target.className == 'number'){
-      e.target.value = number_mask(e.target.value)
-    }
-  })
+
 
   document.querySelector('#municipe-list').addEventListener('click', function(e) {
-    if(e.target.className == 'show_municipe'){
-      show_municipe(e.target.dataset.id);
+    if(e.target.classList.contains('edit-municipe-button')){
+
+      const url = `/municipes/${e.target.dataset.id}/edit`
+  
+      fetch(url)
+        .then(resp => {
+          if (!resp.ok) throw Error(resp.statusText);
+          return resp.text()
+        })
+        .then(body => {
+          open_modal('add', body)
+        }).catch(err => {
+          M.toast({html: "Ocorreu um erro na requisição." + err})
+          return false
+        })
+    } 
+
+
+    if(e.target.classList.contains('show-municipe')){
+      const url = `/municipes/${e.target.dataset.id}`
+
+      fetch(url)
+      .then(resp => {
+        if (!resp.ok) throw Error(resp.statusText);
+        return resp.text()
+      })
+      .then(body => {
+        open_modal('show', body)
+      }).catch(err => {
+        M.toast({html: "Ocorreu um erro na requisição." + err})
+        return false
+      })
     }
   });
   
-  document.getElementById('submit-municipe').addEventListener('click', function(e){
-    e.preventDefault();
-    const form = document.getElementById('create-municipe')
-    let toast_classes = "red darken-3"
-    fetch(form.action,{method:'post', body: new FormData(form)})
-    .then(resp => {
-      if(resp.status === 200){
-        toast_classes = "teal lighten-3"
+  document.getElementById('custom-modal').addEventListener('click', function(e){
+    if(e.target.id == 'submit-municipe'){
+      e.preventDefault();
+      const form = document.getElementById('create-municipe')
+      let toast_classes = "red darken-3"
+      fetch(form.action,{method:'post', body: new FormData(form)})
+      .then(resp => {
+        if(resp.status === 201){
+          toast_classes = "teal lighten-3"
+          close_modal('add');
+        }
+        return  resp.json()
+      })
+      .then(data => {
+        M.toast({html: data.message, classes: toast_classes})
+      })    
+      .catch( err => {
+        M.toast({html: "Ocorreu um erro na requisição.", classes: "red darken-3"})
+      })
+    }
+  });
+
+  
+  document.getElementById('custom-modal').addEventListener('keyup', function(e){
+    if(e.target.classList.contains('number')){
+      e.target.value = number_mask(e.target.value)
+    }
+
+    if(e.target.classList.contains('cep')){
+      e.target.value = number_mask(e.target.value)
+      if(e.target.value.length == 8){
+        search_address(e.target.value)
       }
-      return  resp.json()
-    })
-    .then(data => {
-      M.toast({html: data.message, classes: toast_classes})
-    })    
-    .catch( err => {
-      M.toast({html: "Ocorreu um erro na requisição.", classes: "red darken-3"})
-    })
+    }
   })
+
 });
-
-

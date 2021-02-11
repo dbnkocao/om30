@@ -1,7 +1,7 @@
 <div id="add" class="modal">
   <div class="modal-content">
     <h4>Cadastro de Municipe</h4>
-    <%= form_with model: Municipe.new, id: "create-municipe" do |form| %>
+    <%= form_with model: @municipe, id: "create-municipe" do |form| %>
       <h5>Dados Pessoais</h5>
       <div class="row">
         <div class="input-field col s12">
@@ -41,7 +41,8 @@
       </div>
       <h5>Endereço</h5>
       <div class="row">
-      <%= form.fields_for :endereco, Endereco.new do |endereco| %>
+      <%= form.fields_for :endereco do |endereco| %>
+        <%  %>
         <div class="input-field col s12">
           <%= endereco.text_field :cep, class: "cep", maxlength: "8", size: "8" %>
           <%= endereco.label :cep %>
