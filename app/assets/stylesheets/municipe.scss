@@ -2,3 +2,15 @@
   cursor: pointer;
   color: red;
 }
+
+.modal {
+  height: 75%;
+  width: 90%;
+}
+
+#toast-container {
+  min-width: 10%;
+  // top: 10%;
+  right: 50%;
+  transform: translateX(50%) translateY(5%);
+}

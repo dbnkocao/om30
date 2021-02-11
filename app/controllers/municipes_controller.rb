@@ -7,18 +7,9 @@ class MunicipesController < ApplicationController
     @municipes = Municipe.search params[:query] || "*", page: params[:page], per_page: 20
   end
 
-  # GET /municipes/1
-  # GET /municipes/1.json
-  def show
-  end
-
   # GET /municipes/new
   def new
     @municipe = Municipe.new
-  end
-
-  # GET /municipes/1/edit
-  def edit
   end
 
   # POST /municipes
@@ -28,11 +19,9 @@ class MunicipesController < ApplicationController
 
     respond_to do |format|
       if @municipe.save
-        format.html { redirect_to municipes_url, notice: "Municipe cadastrado com sucesso." }
-        format.json { render :show, status: :created, location: @municipe }
+        format.json { render json: { message: t("messages.municipe.created_with_success") }, status: :created }
       else
-        format.html { redirect_to municipes_url, notice: "Erro ao tentar cadastrar Municipe." }
-        format.json { render json: @municipe.errors, status: :unprocessable_entity }
+        format.json { render json: { message: (["#{t("errors.template.body")}<br>"] << @municipe.errors.full_messages).join("<br>") }, status: :unprocessable_entity }
       end
     end
   end

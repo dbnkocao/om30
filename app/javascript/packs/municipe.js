@@ -25,7 +25,7 @@ const show_municipe = async (municipe_id) => {
 }
 
 const number_mask = function(value) {
-  var regex = /\d*/g; //2 dígitos e 1 word char, dois grupos
+  var regex = /\d*/g;
   var resultado = regex.exec(value);
   return resultado[0];
 }
@@ -52,17 +52,36 @@ document.addEventListener('DOMContentLoaded',  () => {
     }
   })
 
-
   document.querySelector('#add').addEventListener('keyup', function(e){
     if(e.target.className == 'number'){
       e.target.value = number_mask(e.target.value)
     }
   })
+
   document.querySelector('#municipe-list').addEventListener('click', function(e) {
     if(e.target.className == 'show_municipe'){
       show_municipe(e.target.dataset.id);
     }
   });
+  
+  document.getElementById('submit-municipe').addEventListener('click', function(e){
+    e.preventDefault();
+    const form = document.getElementById('create-municipe')
+    let toast_classes = "red darken-3"
+    fetch(form.action,{method:'post', body: new FormData(form)})
+    .then(resp => {
+      if(resp.status === 200){
+        toast_classes = "teal lighten-3"
+      }
+      return  resp.json()
+    })
+    .then(data => {
+      M.toast({html: data.message, classes: toast_classes})
+    })    
+    .catch( err => {
+      M.toast({html: "Ocorreu um erro na requisição.", classes: "red darken-3"})
+    })
+  })
 });
 
 

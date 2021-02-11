@@ -1,7 +1,7 @@
 <div id="add" class="modal">
   <div class="modal-content">
     <h4>Cadastro de Municipe</h4>
-    <%= form_with model: Municipe.new do |form| %>
+    <%= form_with model: Municipe.new, id: "create-municipe" do |form| %>
       <h5>Dados Pessoais</h5>
       <div class="row">
         <div class="input-field col s12">
@@ -20,7 +20,7 @@
         </div>
 
         <div class="input-field col s4">
-          <%= form.text_field :dt_nasc, class: "datepicker" %>
+          <%= form.date_field :dt_nasc %>
           <%= form.label :dt_nasc %>
         </div>
 
@@ -76,7 +76,7 @@
         </div>
       <% end %>
       </div>
-      <%= form.submit class: "btn" %>
+      <%= form.submit class: "btn", id: "submit-municipe" %>
 
     <% end %>
   </div>

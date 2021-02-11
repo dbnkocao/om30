@@ -15,6 +15,7 @@ pt-BR:
         uf: UF
         codigo_ibge: Código IBGE
         municipio: Município
+        numero: Número
   date:
     abbr_day_names:
     - Dom
@@ -148,7 +149,7 @@ pt-BR:
         one: tamanho errado (deve ter 1 caracter)
         other: tamanho errado (deve ter %{count} caracteres)
     template:
-      body: 'Existem problemas com os seguintes campos:'
+      body: 'Ocorreram os seguintes erros:'
       header:
         one: 1 error prohibited this %{model} from being saved
         other: "%{count} errors prohibited this %{model} from being saved"
@@ -221,3 +222,6 @@ pt-BR:
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
     pm: pm
+  messages:
+    municipe:
+      created_with_success: "Municipe criado com sucesso."
