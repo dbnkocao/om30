@@ -49,11 +49,12 @@ class MunicipesController < ApplicationController
   end
 
   def change_status
+    #TODO: separar a apresentação de mensagens de erros
+    #pesquisar gem responders
     @municipe.status = @municipe.status == "ativo" ? "inativo" : "ativo"
 
     respond_to do |format|
       if @municipe.update(municipe_params)
-        format.html { redirect_to root_path, notice: "Status Atualizado com sucesso." }
         format.json { render json: { message: t("messages.municipe.updated_with_success") }, status: :created }
       else
         format.json { render json: { message: (["#{t("errors.template.body")}<br>"] << @municipe.errors.full_messages).join("<br>") }, status: :unprocessable_entity }

@@ -118,6 +118,7 @@ pt-BR:
   errors:
     format: "%{attribute} %{message}"
     messages:
+      age_out: Data de Nascimento inválida, a idade do Municipe deve ficar entre 0 e 150
       accepted: deve ser aceito
       blank: deve ser preenchido
       confirmation: doesn't match %{attribute}
@@ -128,7 +129,7 @@ pt-BR:
       greater_than: deve ser maior que %{count}
       greater_than_or_equal_to: deve ser maior ou igual a %{count}
       inclusion: não está incluso na lista
-      invalid: inválido(a)
+      invalid: inválido
       less_than: deve ser menor que %{count}
       less_than_or_equal_to: deve ser menor ou igual a %{count}
       model_invalid: 'Validação falhou: %{errors}'
@@ -227,3 +228,7 @@ pt-BR:
     municipe:
       created_with_success: "Municipe criado com sucesso."
       updated_with_success: "Municipe atualizado com sucesso."
+
+  pages:
+    titles:
+      municipe_list: Lista de Municipes

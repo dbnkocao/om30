@@ -25,13 +25,13 @@ class Municipe < ApplicationRecord
 
   def cpf_valido
     unless CpfUtils.cpf_valido?(self.cpf)
-      errors.add(:cpf, "CPF Inválido!")
+      errors.add(:cpf, :invalid)
     end
   end
 
   def idade_valida
     if self.dt_nasc != nil and Date.today.year - self.dt_nasc.year > 150 || Date.today.year - self.dt_nasc.year < 0
-      errors.add(:dt_nasc, "Data de Nascimento inválida, a idade do Municipe deve ficar entre 0 e 150")
+      errors.add(:dt_nasc, :age_out)
     end
   end
 

@@ -53,6 +53,29 @@ document.addEventListener('DOMContentLoaded',  () => {
         })
     }
 
+    if(e.target.classList.contains('change-status-municipe-button')){
+
+      const url = `/municipes/${e.target.dataset.id}/change_status`;
+      const csrfToken = document.querySelector("meta[name='csrf-token']").content;
+      fetch(url, {method: "put",
+          headers:{
+            "X-CSRF-Token": csrfToken,
+            "Content-Type": "application/json"
+          }})
+          .then(resp => {
+            if (!resp.ok) throw Error(resp.statusText);
+            get_municipe_list()
+            return resp.json()
+          })
+          .then(data => {
+            M.toast({html: data.message, classes: "teal lighten-3"})
+          }).catch(err => {
+            M.toast({html: "Ocorreu um erro na requisição." + err})
+            return false
+          })
+      }
+
+
     if(e.target.classList.contains('show-municipe')){
       const url = `/municipes/${e.target.dataset.id}`
 

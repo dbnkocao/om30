@@ -23,7 +23,7 @@
           <td>
             <div class="row">
               <button class="btn edit-municipe-button" data-id="<%= municipe.id %>"><%= t('helpers.submit.edit')%></button>
-              <%= button_to municipe.status == "ativo" ? "inativo" : "ativo", {action: "change_status", id: municipe.id}, method: :put, class:"btn",  form: { "data-type" => "json" } %>
+              <button class="btn change-status-municipe-button" data-id="<%= municipe.id %>"><%= municipe.status == "ativo" ? "inativo" : "ativo" %></button>
             </div>
           </td>
         </tr>
