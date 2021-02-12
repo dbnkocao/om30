@@ -61,6 +61,11 @@ class MunicipesController < ApplicationController
     end
   end
 
+  def get_list
+    @municipes = Municipe.search "*", page: params[:page], per_page: 20
+    render partial: "municipes/list"
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

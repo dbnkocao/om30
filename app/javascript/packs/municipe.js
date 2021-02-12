@@ -35,8 +35,6 @@ document.addEventListener('DOMContentLoaded',  () => {
       })
   })
 
-
-
   document.querySelector('#municipe-list').addEventListener('click', function(e) {
     if(e.target.classList.contains('edit-municipe-button')){
 
@@ -53,8 +51,7 @@ document.addEventListener('DOMContentLoaded',  () => {
           M.toast({html: "Ocorreu um erro na requisição." + err})
           return false
         })
-    } 
-
+    }
 
     if(e.target.classList.contains('show-municipe')){
       const url = `/municipes/${e.target.dataset.id}`
@@ -82,12 +79,13 @@ document.addEventListener('DOMContentLoaded',  () => {
       .then(resp => {
         if(resp.status === 201){
           toast_classes = "teal lighten-3"
+          get_municipe_list();
           close_modal('add');
         }
         return  resp.json()
       })
       .then(data => {
-        M.toast({html: data.message, classes: toast_classes})
+        M.toast({html: data.message, classes: toast_classes});
       })    
       .catch( err => {
         M.toast({html: "Ocorreu um erro na requisição.", classes: "red darken-3"})
@@ -108,5 +106,22 @@ document.addEventListener('DOMContentLoaded',  () => {
       }
     }
   })
+
+  function get_municipe_list(){
+    const url = "/municipes_list"
+    fetch(url)
+    .then(resp => {
+      console.log(resp)
+      if (!resp.ok) throw Error(resp.statusText);
+      return resp.text()
+    })
+    .then(body => {
+      document.getElementById('municipe-list').innerHTML = body
+      
+    }).catch(err => {
+      M.toast({html: "Ocorreu um erro na requisição." + err})
+      return false
+    })
+  }
 
 });

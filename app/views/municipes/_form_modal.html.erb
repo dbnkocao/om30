@@ -30,12 +30,10 @@
         </div>
 
         <div class="input-field col s4">
-          <%= form.select :status, ["ativo", "inativo"] %>
-          <%= form.label :status %>
-        </div>
-        <div class="input-field col s4">
-          <%= form.file_field :foto %>
           <%= form.label :foto %>
+          <p>
+            <%= form.file_field :foto %>
+          </p>
         </div>
 
       </div>
