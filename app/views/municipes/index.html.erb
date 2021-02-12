@@ -1,15 +1,15 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
 
-  <h1>Municipes</h1>
+  <h1><%= t('page.titles.municipes')%></h1>
   <div class="row">
     <div class="col s2">
-      <a class="waves-effect waves-light btn" id="create-municipe-button">Cadastrar</a>
+      <a class="waves-effect waves-light btn" id="create-municipe-button"><%= t('helpers.submit.create') %></a>
     </div>
 
     <div class="col s5 right">
       <%= form_with action: municipes_url, method: :get do %>
-        <button class="btn right">Buscar</button>
+        <button class="btn right"><%= t('helpers.submit.search') %></button>
         <%= text_field :query, nil, class: "col s2 right" %>
       <% end %>
     </div>

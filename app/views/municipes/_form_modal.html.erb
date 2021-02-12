@@ -1,8 +1,8 @@
 <div id="add" class="modal">
   <div class="modal-content">
-    <h4>Cadastro de Municipe</h4>
+    <h4><%= t('page.titles.municipe_create')%></h4>
     <%= form_with model: @municipe, id: "create-municipe" do |form| %>
-      <h5>Dados Pessoais</h5>
+      <h5><%= t('pages.titles.personal_data')%></h5>
       <div class="row">
         <div class="input-field col s12">
           <%= form.text_field :nome %>
@@ -36,7 +36,7 @@
           </p>
         </div>
       </div>
-      <h5>Endereço</h5>
+      <h5><%= t('pages.titles.address')%></h5>
       <div class="row">
       <%= form.fields_for :endereco do |endereco| %>
         <%  %>

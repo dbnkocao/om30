@@ -162,6 +162,8 @@ pt-BR:
       submit: Cadastrar %{model}
       update: Atualizar %{model}
       edit: Editar
+      search: Buscar
+      create: Cadastrar
   number:
     currency:
       format:
@@ -231,4 +233,9 @@ pt-BR:
 
   pages:
     titles:
-      municipe_list: Lista de Municipes
+      municipe_create: Cadastro de Munícipe
+      municipe_list: Lista de Munícipes
+      citzens: Munícipes
+      citzen: Munícipe
+      personal_data: Dados Pessoais
+      address: Endereço
