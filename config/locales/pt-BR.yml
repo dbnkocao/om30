@@ -118,6 +118,7 @@ pt-BR:
   errors:
     format: "%{attribute} %{message}"
     messages:
+      no_last_name: É obrigatório ter um sobrenome
       age_out: Data de Nascimento inválida, a idade do Municipe deve ficar entre 0 e 150
       accepted: deve ser aceito
       blank: deve ser preenchido

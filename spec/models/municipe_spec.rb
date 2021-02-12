@@ -12,6 +12,11 @@ RSpec.describe Municipe, type: :model do
     expect(municipe).to_not be_valid
   end
 
+  it "should not be valid without last name" do
+    municipe.nome = FFaker::NameBR.first_name
+    expect(municipe).to_not be_valid
+  end
+
   it "should not be valid without cpf" do
     municipe.cpf = nil
     expect(municipe).to_not be_valid
@@ -51,6 +56,11 @@ RSpec.describe Municipe, type: :model do
 
   it "should not be valid with age greater than 150" do
     municipe.dt_nasc = Date.today - 151.years
+    expect(municipe).to_not be_valid
+  end
+
+  it "should not be valid with dt_nasc greater than current date" do
+    municipe.dt_nasc = Date.today + 1.day
     expect(municipe).to_not be_valid
   end
 end

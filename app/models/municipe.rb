@@ -4,6 +4,8 @@ class Municipe < ApplicationRecord
   validate :cpf_valido
   validate :idade_valida
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validate :last_name
+
   after_create :notificacao_cadastro
   after_update :notificacao_atualizacao
   has_one_attached :foto
@@ -23,14 +25,20 @@ class Municipe < ApplicationRecord
 
   private
 
+  def last_name
+    if nome && nome.split.count < 2
+      errors.add(:nome, :no_last_name)
+    end
+  end
+
   def cpf_valido
-    unless CpfUtils.cpf_valido?(self.cpf)
+    unless CpfUtils.cpf_valido?(cpf)
       errors.add(:cpf, :invalid)
     end
   end
 
   def idade_valida
-    if self.dt_nasc != nil and Date.today.year - self.dt_nasc.year > 150 || Date.today.year - self.dt_nasc.year < 0
+    if dt_nasc != nil && (Date.today.year - dt_nasc.year > 150 || Date.today < dt_nasc)
       errors.add(:dt_nasc, :age_out)
     end
   end
