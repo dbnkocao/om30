@@ -16,7 +16,9 @@ RSpec.describe "/municipes", type: :request do
   # Municipe. As you add validations to Municipe, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    build(:municipe).attributes
+    municipe = build(:municipe).attributes
+    municipe["endereco_attributes"] = build(:endereco).attributes
+    municipe
   }
 
   let(:invalid_attributes) {
@@ -58,62 +60,51 @@ RSpec.describe "/municipes", type: :request do
     context "with valid parameters" do
       it "creates a new Municipe" do
         expect {
-          post municipes_url, params: { municipe: valid_attributes }
+          post municipes_url, params: { municipe: valid_attributes }, as: :json
         }.to change(Municipe, :count).by(1)
-      end
-
-      it "redirects to the created municipe" do
-        post municipes_url, params: { municipe: valid_attributes }
-        expect(response).to redirect_to(municipes_url)
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Municipe" do
         expect {
-          post municipes_url, params: { municipe: invalid_attributes }
+          post municipes_url, params: { municipe: invalid_attributes }, as: :json
         }.to change(Municipe, :count).by(0)
-      end
-
-      it "renders a successful response (i.e. to display the 'new' template)" do
-        post municipes_url, params: { municipe: invalid_attributes }
-        expect(response).to be_successful
       end
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
+      let(:municipe) {
+        create(:endereco).municipe
+      }
+
       let(:new_attributes) {
-        build(:municipe).attributes
+        attributes = build(:municipe).attributes
+        attributes["endereco_attributes"] = build(:endereco).attributes
+        attributes["endereco_attributes"]["id"] = municipe.endereco.id
+        attributes["id"] = municipe.id
+        attributes
       }
 
       it "updates the requested municipe" do
-        municipe = Municipe.create! valid_attributes
-        patch municipe_url(municipe), params: { municipe: new_attributes }
+        patch municipe_url(municipe), params: { municipe: new_attributes }, as: :json
         municipe.reload
 
         expect(municipe.cpf).to eq(new_attributes["cpf"])
         expect(municipe.email).to eq(new_attributes["email"])
         expect(municipe.dt_nasc).to eq(new_attributes["dt_nasc"])
         expect(municipe.telefone).to eq(new_attributes["telefone"])
-        expect(municipe.status).to eq(new_attributes["status"])
         expect(municipe.nome).to eq(new_attributes["nome"])
-      end
-
-      it "redirects to the municipe" do
-        municipe = Municipe.create! valid_attributes
-        patch municipe_url(municipe), params: { municipe: new_attributes }
-        municipe.reload
-        expect(response).to redirect_to(municipes_url)
       end
     end
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         municipe = Municipe.create! valid_attributes
-        patch municipe_url(municipe), params: { municipe: invalid_attributes }
-        expect(response).to be_successful
+        patch municipe_url(municipe), params: { municipe: invalid_attributes }, as: :json
+        expect(response).to_not be_successful
       end
     end
   end
