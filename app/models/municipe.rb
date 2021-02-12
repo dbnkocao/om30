@@ -1,4 +1,6 @@
 class Municipe < ApplicationRecord
+  TELEFONE_PATTERN = /\(\d{2}\)\d{4,5}-\d{4}/
+
   validates_presence_of :nome, :cpf, :email, :dt_nasc, :telefone
   validates_uniqueness_of :cpf
   validate :cpf_valido
