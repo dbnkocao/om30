@@ -1,9 +1,3 @@
-const number_mask = function(value) {
-  var regex = /\d*/g;
-  var resultado = regex.exec(value);
-  return resultado[0];
-}
-
 const search_address = async function(cep){
   const url = `https://viacep.com.br/ws/${cep}/json/`
   const response = await fetch(url);
@@ -35,6 +29,16 @@ const cep_mask = function(value){
   .replace(/(\d{5})(\d{3})/, '$1-$2')
 
   return new_value;
+}
+
+const telefone_mask = function(value){
+  let new_value = value
+  .replace(/\D/g, '')
+  .replace(/(\d{2})(\d)/, '($1)$2')
+  .replace(/(\d{5})(\d{4})/, '$1-$2')
+  .replace(/(\d{4})(\d{4})/, '$1-$2')
+  
+  return new_value
 }
 
 
@@ -141,12 +145,15 @@ document.addEventListener('DOMContentLoaded',  () => {
   
   document.getElementById('custom-modal').addEventListener('keyup', function(e){
     if(e.target.classList.contains('cpf')){
-      let new_value = cpf_mask(e.target.value)
-      e.target.value = new_value
+      e.target.value = cpf_mask(e.target.value)
     }
 
     if(e.target.classList.contains('number')){
       e.target.value = number_mask(e.target.value)
+    }
+
+    if(e.target.classList.contains('telefone')){
+      e.target.value = telefone_mask(e.target.value)
     }
 
     if(e.target.classList.contains('cep')){

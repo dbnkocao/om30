@@ -3,9 +3,11 @@ class Municipe < ApplicationRecord
 
   validates_presence_of :nome, :cpf, :email, :dt_nasc, :telefone
   validates_uniqueness_of :cpf
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :telefone, format: { with: self::TELEFONE_PATTERN }
+
   validate :cpf_valido
   validate :idade_valida
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validate :last_name
 
   after_create :notificacao_cadastro

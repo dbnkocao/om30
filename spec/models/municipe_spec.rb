@@ -54,6 +54,11 @@ RSpec.describe Municipe, type: :model do
     expect(municipe).to_not be_valid
   end
 
+  it "should not be valid with invalid telefone" do
+    municipe.telefone = FFaker::PhoneNumberBR.mobile_phone_number
+    expect(municipe).to_not be_valid
+  end
+
   it "should not be valid with age greater than 150" do
     municipe.dt_nasc = Date.today - 151.years
     expect(municipe).to_not be_valid
