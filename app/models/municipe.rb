@@ -19,7 +19,7 @@ class Municipe < ApplicationRecord
 
   enum status: [:ativo, :inativo], _default: :ativo
 
-  searchkick
+  searchkick match: :word_middle
 
   def search_data
     attributes.merge(

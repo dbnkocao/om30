@@ -1,3 +1,5 @@
+import axios from "axios-on-rails";
+
 const search_address = async function(cep){
   const url = `https://viacep.com.br/ws/${cep}/json/`
   const response = await fetch(url);
@@ -42,7 +44,25 @@ const telefone_mask = function(value){
 }
 
 
+const municipe_list = (query = null) => {
+  let url = "/municipes_list"
+  if(query !== null){
+    url = `${url}?query=${query}`
+  }
+  axios(url).then(response => {
+    document.getElementById('municipe-list').innerHTML = response.data
+  }).catch(error => {
+    console.log(error)
+    M.toast({html: "Ocorreu um erro na requisição." + error.message})
+  })
+}
+
+
 document.addEventListener('DOMContentLoaded',  () => {
+  document.getElementById('query').addEventListener('keyup', function (e) {
+    municipe_list(e.target.value);
+
+  })
   document.getElementById('create-municipe-button').addEventListener('click', function(){
     const url = `/municipes/new`
 
@@ -121,25 +141,19 @@ document.addEventListener('DOMContentLoaded',  () => {
     if(e.target.id == 'submit-municipe'){
       e.preventDefault();
       const form = document.getElementById('create-municipe')
-      let toast_classes = "red darken-3"
-      fetch(form.action,{method:'post', body: new FormData(form)})
-      .then(resp => {
-        if(resp.status === 201){
-          toast_classes = "teal lighten-3"
-          get_municipe_list();
-          close_modal('add');
-        }
-        return  resp.json()
-      })
-      .then(data => {
-        M.toast({html: data.message, classes: toast_classes});
-      })    
-      .catch( err => {
-        M.toast({html: "Ocorreu um erro na requisição.", classes: "red darken-3"})
-      })
-    }
 
-    
+      axios({
+        method: form.method,
+        url: form.action + ".json",
+        data: new FormData(form)
+      }).then(response => {
+        M.toast({html: response.data.message, classes: "teal lighten-3"});
+        close_modal('add')
+        municipe_list()
+      }).catch(error => {
+        M.toast({html: error.response.data.message, classes: "red darken-3"});
+      });
+    }
   });
   
   
@@ -164,21 +178,5 @@ document.addEventListener('DOMContentLoaded',  () => {
     }
   })
 
-  function get_municipe_list(){
-    const url = "/municipes_list"
-    fetch(url)
-    .then(resp => {
-      console.log(resp)
-      if (!resp.ok) throw Error(resp.statusText);
-      return resp.text()
-    })
-    .then(body => {
-      document.getElementById('municipe-list').innerHTML = body
-      
-    }).catch(err => {
-      M.toast({html: "Ocorreu um erro na requisição." + err})
-      return false
-    })
-  }
 
 });

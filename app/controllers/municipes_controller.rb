@@ -4,7 +4,7 @@ class MunicipesController < ApplicationController
   # GET /municipes
   # GET /municipes.json
   def index
-    @municipes = Municipe.search params[:query] || "*", page: params[:page], per_page: 20
+    @municipes = Municipe.search params[:query] || "", page: params[:page], per_page: 20
   end
 
   # GET /municipes/new
@@ -41,7 +41,7 @@ class MunicipesController < ApplicationController
   def update
     respond_to do |format|
       if @municipe.update(municipe_params)
-        format.json { render json: { message: t("messages.municipe.updated_with_success") }, status: :created }
+        format.json { render json: { message: t("messages.municipe.updated_with_success") }, status: :ok }
       else
         format.json { render json: { message: (["#{t("errors.template.body")}<br>"] << @municipe.errors.full_messages).join("<br>") }, status: :unprocessable_entity }
       end
@@ -63,7 +63,8 @@ class MunicipesController < ApplicationController
   end
 
   def get_list
-    @municipes = Municipe.search "*", page: params[:page], per_page: 20
+    @municipes = Municipe.search params[:query] || "*", page: params[:page], per_page: 20
+
     render partial: "municipes/list"
   end
 
@@ -79,10 +80,5 @@ class MunicipesController < ApplicationController
     params.fetch(:municipe, {})
       .permit(:cpf, :email, :dt_nasc, :telefone, :nome, :foto,
               { :endereco_attributes => [:id, :cep, :logradouro, :numero, :complemento, :bairro, :municipio, :uf, :codigo_ibge] })
-  end
-
-  def municipe_params_update
-    params.fetch(:municipe, {})
-      .permit(:status)
   end
 end
