@@ -4,7 +4,7 @@ class MunicipesController < ApplicationController
   # GET /municipes
   # GET /municipes.json
   def index
-    @municipes = Municipe.search params[:query] || "", page: params[:page], per_page: 20
+    @municipes = Municipe.search "*", page: params[:page], per_page: 20
   end
 
   # GET /municipes/new
@@ -63,8 +63,8 @@ class MunicipesController < ApplicationController
   end
 
   def get_list
-    @municipes = Municipe.search params[:query] || "*", page: params[:page], per_page: 20
-
+    query = params[:query].present? ? params[:query] : "*"
+    @municipes = Municipe.search query, page: params[:page], per_page: 20
     render partial: "municipes/list"
   end
 

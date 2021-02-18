@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded',  () => {
           }})
           .then(resp => {
             if (!resp.ok) throw Error(resp.statusText);
-            get_municipe_list()
+            municipe_list()
             return resp.json()
           })
           .then(data => {
