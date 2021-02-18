@@ -39,9 +39,11 @@ gem 'will_paginate', '~> 3.1.0'
 
 gem 'searchkick', '~> 4.4.2'
 
-gem 'rails-ujs'
+gem 'rails-ujs', '~> 0.1.0'
 
-gem 'rack-cors'
+gem 'rack-cors', '~> 1.1.1'
+
+gem 'active_model_serializers', '~> 0.10.12'
 
 
 group :development, :test do
