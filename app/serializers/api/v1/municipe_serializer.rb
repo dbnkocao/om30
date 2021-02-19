@@ -1,5 +1,5 @@
 class MunicipeSerializer < ActiveModel::Serializer
-  attributes :id, :nome, :cpf, :telefone, :dt_nasc, :endereco_attributes, :foto
+  attributes :id, :nome, :email, :cpf, :telefone, :dt_nasc, :endereco_attributes, :foto
 
   def endereco_attributes
     {
@@ -9,7 +9,7 @@ class MunicipeSerializer < ActiveModel::Serializer
       numero: object.endereco.numero,
       complemento: object.endereco.complemento,
       bairro: object.endereco.bairro,
-      cidade: object.endereco.municipio,
+      municipio: object.endereco.municipio,
       uf: object.endereco.uf,
       codigo_ibge: object.endereco.codigo_ibge,
     }

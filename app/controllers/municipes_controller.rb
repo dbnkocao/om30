@@ -75,7 +75,6 @@ class MunicipesController < ApplicationController
     @municipe = Municipe.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def municipe_params
     params.fetch(:municipe, {})
       .permit(:cpf, :email, :dt_nasc, :telefone, :nome, :foto,
