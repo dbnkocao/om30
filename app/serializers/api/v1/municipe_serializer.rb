@@ -10,12 +10,13 @@ class MunicipeSerializer < ActiveModel::Serializer
       complemento: object.endereco.complemento,
       bairro: object.endereco.bairro,
       cidade: object.endereco.municipio,
-      estado: object.endereco.uf,
-      estado: object.endereco.codigo_ibge,
+      uf: object.endereco.uf,
+      codigo_ibge: object.endereco.codigo_ibge,
     }
   end
 
   def foto
+    return "" unless object.foto.present?
     Rails.application.routes.url_helpers.rails_blob_url(object.foto, only_path: true)
   end
 end
