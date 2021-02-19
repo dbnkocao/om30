@@ -16,6 +16,6 @@ class MunicipeSerializer < ActiveModel::Serializer
   end
 
   def foto
-    Rails.application.routes.url_helpers.rails_blob_url(Municipe.last.foto, only_path: true)
+    Rails.application.routes.url_helpers.rails_blob_url(object.foto, only_path: true)
   end
 end
