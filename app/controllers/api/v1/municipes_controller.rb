@@ -5,7 +5,7 @@ module Api
       before_action :set_municipe, only: [:show, :update, :change_status]
 
       def index
-        render json: Municipe.all
+        render json: Municipe.order(created_at: :desc)
       end
 
       def show
