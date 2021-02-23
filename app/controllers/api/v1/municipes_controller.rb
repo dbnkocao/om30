@@ -2,7 +2,7 @@ module Api
   module V1
     class MunicipesController < ApplicationController
       skip_before_action :verify_authenticity_token
-      before_action :set_municipe, only: [:show, :update]
+      before_action :set_municipe, only: [:show, :update, :change_status]
 
       def index
         render json: Municipe.all
@@ -26,6 +26,14 @@ module Api
           render json: { message: "Munícipe atualizado com sucesso!" }, status: :created
         else
           render json: { errors: @municipe.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+
+      def change_status
+        if @municipe.update(status: @municipe.status == "ativo" ? "inativo" : "ativo")
+          render json: { message: "Status alterado com sucesso!" }, status: :created
+        else
+          render json: { message: @municipe.errors.full_messages }, status: :unprocessable_entity
         end
       end
 

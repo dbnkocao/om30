@@ -1,5 +1,5 @@
 class MunicipeSerializer < ActiveModel::Serializer
-  attributes :id, :nome, :email, :cpf, :telefone, :dt_nasc, :endereco_attributes, :foto
+  attributes :id, :nome, :email, :cpf, :telefone, :dt_nasc, :endereco_attributes, :status
 
   def endereco_attributes
     {
@@ -15,8 +15,8 @@ class MunicipeSerializer < ActiveModel::Serializer
     }
   end
 
-  def foto
-    return "" unless object.foto.present?
-    Rails.application.routes.url_helpers.rails_blob_url(object.foto, only_path: true)
-  end
+  # def foto
+  #   return "" unless object.foto.present?
+  #   Rails.application.routes.url_helpers.rails_blob_url(object.foto, only_path: true)
+  # end
 end
