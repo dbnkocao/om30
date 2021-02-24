@@ -27,6 +27,11 @@ class Municipe < ApplicationRecord
     )
   end
 
+  def foto_url
+    return "" unless foto.present?
+    Rails.application.routes.url_helpers.rails_blob_url(foto, only_path: true)
+  end
+
   private
 
   def last_name
