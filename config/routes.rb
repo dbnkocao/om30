@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :municipes, only: [:index, :show, :create, :update]
       put "municipes/:id/change_status", to: "municipes#change_status"
+      get "municipes/search/:query", to: "municipes#search"
     end
   end
 

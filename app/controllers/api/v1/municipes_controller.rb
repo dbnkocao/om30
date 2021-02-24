@@ -37,6 +37,10 @@ module Api
         end
       end
 
+      def search
+        render json: Municipe.search(params[:query], page: params[:page], per_page: 20)
+      end
+
       private
 
       def set_municipe
