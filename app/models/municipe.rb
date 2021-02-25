@@ -1,6 +1,7 @@
 class Municipe < ApplicationRecord
   TELEFONE_PATTERN = /\(\d{2}\)\d{4,5}-\d{4}/
 
+  serialize :preferences, JSON
   validates_presence_of :nome, :cpf, :email, :dt_nasc, :telefone
   validates_uniqueness_of :cpf
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -19,12 +20,13 @@ class Municipe < ApplicationRecord
 
   enum status: [:ativo, :inativo], _default: :ativo
 
-  searchkick match: :word_middle
+  searchkick text_middle: [:nome, :cpf, :telefone, :dt_nasc, :logradouro, :bairro]
 
   def search_data
-    attributes.merge(
-      municipio: endereco.try(:municipio),
-    )
+    {
+      bairro: endereco.bairro,
+      logradouro: endereco.logradouro,
+    }
   end
 
   def foto_url

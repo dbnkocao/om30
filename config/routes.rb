@@ -9,9 +9,9 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: "json" } do
     namespace :v1 do
-      resources :municipes, only: [:index, :show, :create, :update]
+      resources :municipes, only: [:show, :create, :update]
       put "municipes/:id/change_status", to: "municipes#change_status"
-      get "municipes/search/:query", to: "municipes#search"
+      get "municipes/search/:query/:page", to: "municipes#search"
     end
   end
 
